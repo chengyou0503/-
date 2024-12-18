@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>點餐系統</title>
+    <title>新易現炒點餐系統</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,20 +21,22 @@
             margin-bottom: 20px;
         }
         #categories button {
-            padding: 10px 20px;
+            padding: 15px 25px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
+            font-size: 1.2em;
             cursor: pointer;
+            margin: 10px;
         }
         #categories button:hover {
             background-color: #0056b3;
         }
         #menu {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
             justify-content: center;
         }
         .menu-item {
@@ -43,11 +45,10 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 150px;
-            display: none; /* 預設隱藏 */
+            display: none;
         }
         .menu-item.active {
-            display: block; /* 顯示當前分類的菜單 */
+            display: block;
         }
         .menu-item button {
             margin-top: 10px;
@@ -69,6 +70,21 @@
         #order li {
             padding: 10px;
             border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-button {
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .delete-button:hover {
+            background-color: #a71d2a;
         }
         #total {
             text-align: right;
@@ -88,7 +104,6 @@
         #reset-button:hover {
             background-color: #a71d2a;
         }
-        /* 彈窗樣式 */
         #popup {
             position: fixed;
             top: 50%;
@@ -100,7 +115,8 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             display: none;
             text-align: center;
-            width: 300px;
+            width: 80%;
+            font-size: 1.2em;
             z-index: 1000;
         }
         #popup button {
@@ -115,38 +131,30 @@
         #popup button:hover {
             background-color: #0056b3;
         }
-        #popup .close {
-            background-color: #dc3545;
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
         }
-        #popup .close:hover {
-            background-color: #a71d2a;
+        #back-to-top:hover {
+            background-color: #0056b3;
         }
-        #order li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    }
-
-    .delete-button {
-    padding: 5px 10px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.delete-button:hover {
-    background-color: #a71d2a;
-}
-
-.delete-button:focus {
-    outline: none;
-}
+        @media (max-width: 768px) {
+            #categories button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+            #menu {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
     </style>
 </head>
 <body>
